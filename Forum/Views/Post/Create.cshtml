@@ -1,0 +1,78 @@
+﻿@model DataLayer.Post
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/menu.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Post</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <!--<div class="editor-label">
+            @Html.LabelFor(model => model.postType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.postType)
+            @Html.ValidationMessageFor(model => model.postType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ThreadID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ThreadID)
+            @Html.ValidationMessageFor(model => model.ThreadID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.postedAt)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.postedAt)
+            @Html.ValidationMessageFor(model => model.postedAt)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.postedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.postedBy)
+            @Html.ValidationMessageFor(model => model.postedBy)
+        </div>-->
+        <div>
+             @Html.HiddenFor(model => model.ThreadID, new { Value=@ViewBag.id })
+             @Html.HiddenFor(model => model.postedBy, new { Value=@ViewBag.postedBy})
+           
+            @{
+                if (ViewBag.postid != null)
+                {
+                    @Html.HiddenFor(model => model.repliedTo, new { Value=@ViewBag.postid })
+                    @Html.HiddenFor(model => model.postType, new { Value="Quote_Reply" })
+                }
+                            
+            }
+
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Details", "Thread", new {id=ViewBag.id },null)
+</div>

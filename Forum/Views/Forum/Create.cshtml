@@ -1,0 +1,34 @@
+﻿@model DataLayer.Board
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/menu.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Board</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BoardTitle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BoardTitle)
+            @Html.ValidationMessageFor(model => model.BoardTitle)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Board","Forum")
+</div>
+
+

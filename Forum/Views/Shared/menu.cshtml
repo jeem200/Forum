@@ -1,0 +1,43 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="~/Content/External/design.css">
+</head>
+
+	<header class="nav">
+		<div class="container">
+			<a class="logo"><img src="~/Content/Image/logo-shym.png" alt="shym"></a>
+		
+			<div class="menu">
+				<ul>
+                    <li>@Html.ActionLink("Home","Index","Home", null,null);</li>
+
+					<li><a href="#">Support</a></li>
+					<li><a href="#">Widgets</a></li>
+                    <li>@Html.ActionLink("Forum","Board","Forum");</li>
+					<li><a href="#">Recent works</a></li>
+					<li>@Html.ActionLink("User","UserMenuCon","User")</li>
+					<li><a href="#">Blog</a></li>
+                    @{  if(Session["user"]==null)
+                        {   
+                         <li>@Html.ActionLink("Log In","Login","Account", null,null);</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Log Out","LogOut","Account", null,null);</li>
+                        }
+                    }
+				</ul>
+			</div>
+		</div>
+	</header>
+    <body>
+        @RenderBody()
+    </body>
+</html>

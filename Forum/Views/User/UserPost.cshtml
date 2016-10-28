@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DataLayer.Post>
+
+@{
+    ViewBag.Title = "UserPost";
+    Layout = "~/Views/Shared/menu.cshtml";
+    Html.RenderPartial("~/Views/Shared/UserMenu.cshtml");
+}
+
+<h2>UserPost</h2>
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThreadID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.repliedTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.like_count)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class="table table-bordered">
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThreadID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.repliedTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.like_count)
+        </td>
+       
+    </tr>
+}
+
+</table>

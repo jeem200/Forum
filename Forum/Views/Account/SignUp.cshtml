@@ -1,0 +1,65 @@
+﻿@model DataLayer.User
+
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/menu.cshtml";
+}
+
+<h2>SignUp</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>User</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.userName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.userName)
+            @Html.ValidationMessageFor(model => model.userName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Mail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Mail)
+            @Html.ValidationMessageFor(model => model.Mail)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <!--<div class="editor-label">
+            @Html.LabelFor(model => model.userType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.userType)
+            @Html.ValidationMessageFor(model => model.userType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.like_recieved)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.like_recieved)
+            @Html.ValidationMessageFor(model => model.like_recieved)
+        </div>-->
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

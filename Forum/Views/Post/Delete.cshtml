@@ -1,0 +1,69 @@
+﻿@model DataLayer.Post
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/menu.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Post</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.postType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.postType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ThreadID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ThreadID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.postedAt)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.postedAt)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.postedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.postedBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.repliedTo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.repliedTo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.like_count)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.like_count)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Details", "Thread", new {id=Model.ThreadID },null);
+        @Html.HiddenFor(model => model.ThreadID, new { Value=Model.ThreadID });
+    </p>
+}

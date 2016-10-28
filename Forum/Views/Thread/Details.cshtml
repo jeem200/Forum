@@ -1,0 +1,138 @@
+﻿@model DataLayer.Thread
+
+<div class="container">
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/menu.cshtml";
+}
+
+<h2>Details</h2>
+
+@{
+       if(Session["user"]!=null)
+       { 
+         
+         if(Model.status=="Unlocked"&&Session["usertype"].ToString()!="user")
+         {
+            
+             @Html.ActionLink("Lock this Thread", "LockThread", "Thread", new { ViewBag.id }, null)
+    
+         }
+         if (Model.status == "Unlocked")
+         {
+            <div> @Html.ActionLink("Reply to this Thread", "Create", "Post", new { ViewBag.id }, null)</div> 
+         }
+         if(Model.status=="Locked"&&Session["usertype"].ToString()!="user")
+         {
+             @Html.ActionLink("UnLock this Thread", "UnlockThread", "Thread", new { ViewBag.id }, null)
+         }
+       }
+ }
+
+
+<fieldset>
+    <legend>Thread</legend>
+
+   <!-- <div class="display-label">
+         @Html.DisplayNameFor(model => model.title)
+    </div>-->
+    <div class="display-field">
+        @Html.DisplayFor(model => model.title)
+    </div>
+
+    <!--<div class="display-label">
+         @Html.DisplayNameFor(model => model.BoardId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BoardId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.startpost)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.startpost)
+    </div>-->
+</fieldset>
+<!--<p>
+    
+    @Html.ActionLink("Back to List", "Index")
+</p>-->
+
+<div>
+<div class="row row_pad">
+@foreach(var item in Model.post)
+{
+    DataLayer.ForumContext context = new DataLayer.ForumContext();
+    DataLayer.User user=(DataLayer.User)context.user.Where(s=>s.userID==item.postedBy).FirstOrDefault();
+    if (item.postType == "Thread_Reply") 
+   {  
+       <div class="col-md-2 row_pad ">
+       @user.userName
+        </div>
+    
+      <div class="col-md-10 row_pad">
+       <p>@item.description</p>
+       
+       
+      @if(Session["user"]!=null&&ViewBag.status=="Unlocked")
+      {    
+     <div class="pad"> @Html.ActionLink("Quote", "Create", "Post", new {id= ViewBag.id,postid=item.postId }, null)</div>
+        
+        if(Session["usertype"].ToString()== "Moderator"||Session["usertype"].ToString()=="MasterAdmin")
+        {
+             <div class="pad">  @Html.ActionLink("Edit", "Edit", "Post",new { id=item.postId },null)</div>
+            <div class="pad"> @Html.ActionLink("Delete", "Delete","Post" ,new { id=item.postId },null)</div>
+        }
+          
+        else if(Convert.ToInt32 (Session["user"]) == item.postedBy)
+        {
+           <div class="pad"> @Html.ActionLink("Edit", "Edit", "Post",new { id=item.postId },null)</div>
+        }
+        <div>@item.like_count Likes</div>
+        <div class="pad"> @Html.ActionLink("Like", "Like", "Post",new { id=item.postId,userId=Session["user"] },null)</div>
+      }
+           <hr style="border:1px solid black"/>
+       </div>
+       
+      
+    }
+ 
+   else if (item.postType == "Quote Reply")
+   {
+     
+       DataLayer.Post post = (DataLayer.Post)context.post.Where(s => s.postId == item.repliedTo).FirstOrDefault();
+     <div class="col-md-2">
+           @user.userName
+   </div>
+        <div class="col-md-10">
+           <div class="panel" style="border:1px solid black"><p class="panel-body">@post.description </p></div><br> 
+               <div><p>@item.description</p></div>
+          
+      @if (Session["user"] != null && ViewBag.status == "Unlocked")
+      {
+
+         <div class="pad">  @Html.ActionLink("Quote", "Create", "Post", new {id= ViewBag.id,postid=item.postId }, null) </div>
+           
+          if(Session["usertype"].ToString()== "Moderator"||Session["usertype"].ToString()=="MasterAdmin")
+           {
+              <div class="pad"> @Html.ActionLink("Edit", "Edit","Post" ,new { id=item.postId },null)</div>
+              <div class="pad"> @Html.ActionLink("Delete", "Delete","Post" ,new { id=item.postId },null)</div>
+           }
+    
+           else  if(Convert.ToInt32 (Session["user"]) == item.postedBy)
+           {
+              <div class="pad"> @Html.ActionLink("Edit", "Edit","Post", new { id=item.postId },null)</div>
+           }
+           <div>@item.like_count Likes</div>
+           <div class="pad"> @Html.ActionLink("Like", "Like", "Post",new { id=item.postId,userId=Session["user"] },null)</div>
+       }
+            <hr style="border:1px solid black"/>
+     </div>
+    
+   }
+}
+ </div>
+</div>
+</div>

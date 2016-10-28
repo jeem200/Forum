@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DataLayer.Thread>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/menu.cshtml";
+}
+
+<h2>Details</h2>
+
+<p>
+    @{
+       if(Session["user"]!=null)
+       { 
+         @Html.ActionLink("Start a new Topic", "Create", "Thread", new { ViewBag.id }, null)
+       }
+     }
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+           <!-- @Html.DisplayNameFor(model => model.BoardId)-->
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <!--@Html.DisplayFor(modelItem => item.title)-->
+             @Html.ActionLink(item.title.ToString(), "Details","Thread" ,new { id=item.id},null)
+
+        </td>
+        <td>
+            <!--@Html.DisplayFor(modelItem => item.BoardId)-->
+        </td>
+        <td>
+           <!-- @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })-->
+        </td>
+    </tr>
+}
+
+</table>

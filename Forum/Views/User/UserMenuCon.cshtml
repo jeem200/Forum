@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "UserMenuCon";
+    Layout = "~/Views/Shared/menu.cshtml";
+   
+}
+
+
+
+  @{
+      if (Session["user"] != null)
+      {
+          <h2>UserMenuCon</h2>
+          Html.RenderPartial("~/Views/Shared/UserMenu.cshtml");
+      }
+      else
+      {
+       <p>You Are Not Allowed to Visit This Page</p>   
+      }
+   }

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DataLayer.User>
+
+@{
+    ViewBag.Title = "ViewUserList";
+    Layout = "~/Views/Shared/menu.cshtml";
+    Html.RenderPartial("~/Views/Shared/UserMenu.cshtml");
+}
+
+<h2>ViewUserList</h2>
+
+@{}
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.userName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mail)
+        </th>
+        <!--<th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>-->
+        <th>
+            @Html.DisplayNameFor(model => model.userType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.like_recieved)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class="table table-bordered">
+        <td>
+            @Html.DisplayFor(modelItem => item.userName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mail)
+        </td>
+        <!--<td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>-->
+        <td>
+            @Html.DisplayFor(modelItem => item.userType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.like_recieved)
+        </td>
+     <td>
+            @{
+                if(item.userType.ToString()=="user")
+                {
+                  @Html.ActionLink("Promote to Moderator", "Edit", new { id=item.userID })   
+                }
+                else if (item.userType.ToString() == "Moderator")
+                {
+                    @Html.ActionLink("Demote to User", "EditDemote", new { id=item.userID })
+                }
+                    
+             }       @Html.ActionLink("Details", "Details", new { id=item.userID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.userID })
+        </td>
+    </tr>
+}
+
+</table>

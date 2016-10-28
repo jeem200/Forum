@@ -1,0 +1,75 @@
+﻿@model DataLayer.Post
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/menu.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Post</legend>
+
+        @Html.HiddenFor(model => model.postId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.HiddenFor(model => model.postType)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.postType)
+            @Html.ValidationMessageFor(model => model.postType)
+        </div>
+
+        <div class="editor-label">
+            @Html.HiddenFor(model => model.ThreadID)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.ThreadID)
+            @Html.ValidationMessageFor(model => model.ThreadID)
+        </div>
+
+        <div class="editor-label">
+            @Html.HiddenFor(model => model.postedAt)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.postedAt)
+            @Html.ValidationMessageFor(model => model.postedAt)
+        </div>
+
+        <div class="editor-label">
+            @Html.HiddenFor(model => model.postedBy)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.postedBy)
+            @Html.ValidationMessageFor(model => model.postedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.HiddenFor(model => model.repliedTo)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.repliedTo)
+            @Html.ValidationMessageFor(model => model.repliedTo)
+        </div>
+
+        <p>
+            
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+   @Html.ActionLink("Back to List", "Details", "Thread", new {id=Model.ThreadID},null)
+</div>

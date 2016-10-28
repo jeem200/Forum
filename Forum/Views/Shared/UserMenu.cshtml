@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "User";
+   
+}
+
+@{
+    
+     if(Session["usertype"].ToString()=="MasterAdmin")
+     {
+            @Html.ActionLink("View User List","ViewUserList","User");
+            @Html.ActionLink("My Post","UserPost","User",new {id=Convert.ToInt32(Session["user"])},null);
+     }
+     else if(Session["usertype"].ToString()=="Moderator")
+     {
+         @Html.ActionLink("My Post", "UserPost", "User",new {id=Convert.ToInt32(Session["user"])},null);
+     }
+     else
+     {
+         @Html.ActionLink("My Post", "UserPost", "User", new {id=Convert.ToInt32(Session["user"])},null);
+     }
+    
+
+    
+ }

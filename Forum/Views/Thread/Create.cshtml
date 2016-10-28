@@ -1,0 +1,51 @@
+﻿@model DataLayer.Thread
+
+@{
+    ViewBag.Title = "Create";
+     Layout = "~/Views/Shared/menu.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Thread</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.title)
+            @Html.ValidationMessageFor(model => model.title)
+        </div>
+
+        <div class="editor-label">
+           <!-- @Html.LabelFor(model => model.BoardId)-->
+            @Html.HiddenFor(model => model.BoardId, new { Value=@ViewBag.id })
+        </div>
+        <!--<div class="editor-field">
+            @Html.EditorFor(model => model.BoardId)
+            @Html.ValidationMessageFor(model => model.BoardId)
+        </div>-->
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.startpost)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.startpost)
+            @Html.ValidationMessageFor(model => model.startpost)
+        </div>
+
+        <p>
+            @Html.Hidden("startedBy", null, new { Value=@ViewBag.user})
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Details", "Forum", new {id=ViewBag.id },null)
+</div>
+
